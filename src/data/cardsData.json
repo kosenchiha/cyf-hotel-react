@@ -1,0 +1,17 @@
+[
+  {
+    "imgSource": "https://www.ledhut.co.uk/blog/wp-content/uploads/2015/09/Glasgow-600x400.jpg",
+    "link": "https://peoplemakeglasgow.com/",
+    "pText": "Visit Glasgow"
+  },
+  {
+    "imgSource": "https://omghcontent.affino.com/AcuCustom/Sitename/DAM/107/GREATER-MANCHESTER-MIN__thumb.jpg",
+    "link": "https://www.visitmanchester.com/",
+    "pText": "Visit Manchester"
+  },
+  {
+    "imgSource": "https://americanidol-blog.com/wp-content/uploads/2014/12/3-emblematic-places-to-visit-in-London-600x400.jpg",
+    "link": "https://www.visitlondon.com/",
+    "pText": "Visit London"
+  }
+]
