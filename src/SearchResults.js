@@ -97,7 +97,10 @@ class Line extends Component {
 
   render() {
     let booking = this.props.booking;
-
+    let numberOfDays = moment(booking.checkOutDate).diff(
+      moment(booking.checkInDate),
+      "days"
+    );
     return (
       <tr
         onClick={this.handleClick}
@@ -112,12 +115,7 @@ class Line extends Component {
         <td>{booking.checkInDate}</td>
         <td>{booking.checkOutDate}</td>
 
-        <td>
-          {moment(booking.checkOutDate).diff(
-            moment(booking.checkInDate),
-            "days"
-          )}
-        </td>
+        <td>{numberOfDays}</td>
       </tr>
     );
   }
@@ -135,19 +133,20 @@ class SearchResults extends Component {
       <table className="table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>First name</th>
-            <th>Surname</th>
+            <th onClick={e => this.props.handleClick(e, "id")}>ID</th>
+            <th onClick={e => this.props.handleClick(e, "title")}>Title</th>
+            <th onClick={e => this.props.handleClick(e, "firstName")}>
+              First name
+            </th>
+            <th onClick={e => this.props.handleClick(e, "surname")}>Surname</th>
             {/* <th>Email</th> */}
-            <th>Room ID</th>
+            <th onClick={e => this.props.handleClick(e, "roomId")}>Room ID</th>
             <th>Check in</th>
             <th>Check out</th>
             <th>Number of days</th>
           </tr>
         </thead>
         <tbody>
-          {console.log(this.props.results)}
           {results.map((booking, index) => {
             return <Line booking={booking} key={index} />;
           })}

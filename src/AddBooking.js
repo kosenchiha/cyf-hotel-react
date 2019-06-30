@@ -17,56 +17,37 @@ class AddBooking extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
     this.props.addNewBoking(this.state);
+  };
+  inputRow = (idName, placeholderText, lableText) => {
+    return (
+      <div className="form-group row">
+        <label className="col-sm-2 col-form-label" htmlFor={idName}>
+          {lableText}
+        </label>
+        <div className="col-sm-10">
+          <input
+            className="form-control"
+            type="text"
+            id={idName}
+            placeholder={placeholderText}
+            onChange={this.handleChange}
+          />
+        </div>
+      </div>
+    );
   };
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          id="id"
-          placeholder="ID"
-          onChange={this.handleChange}
-        />
-        <label htmlFor="title">Title</label>
-        <input
-          type="text"
-          id="title"
-          placeholder="Title"
-          onChange={this.handleChange}
-        />
-        <input
-          type="text"
-          id="tfirstName"
-          placeholder="First name"
-          onChange={this.handleChange}
-        />
-        <input
-          type="text"
-          id="surname"
-          placeholder="Surname"
-          onChange={this.handleChange}
-        />
-        <input
-          type="text"
-          id="roomID"
-          placeholder="Room ID"
-          onChange={this.handleChange}
-        />
-        <input
-          type="text"
-          id="checkInDate"
-          placeholder="Check in"
-          onChange={this.handleChange}
-        />
-        <input
-          type="text"
-          id="checkOutDate"
-          placeholder="Check Out"
-          onChange={this.handleChange}
-        />
-        <button>Submit</button>
+        {this.inputRow("id", "ID", "ID")}
+        {this.inputRow("title", "Title", "Title")}
+        {this.inputRow("firstName", "First Name", "First Name")}
+        {this.inputRow("surname", "Surname", "Surname")}
+        {this.inputRow("roomID", "Room ID", "Room ID")}
+        {this.inputRow("checkInDate", "Check In", "Check In")}
+        {this.inputRow("checkOutDate", "Check Out", "Check Out")}
+        <button className="btn btn-primary">Submit</button>
       </form>
     );
   }

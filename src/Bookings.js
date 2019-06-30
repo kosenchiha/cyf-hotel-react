@@ -26,6 +26,7 @@ class Bookings extends Component {
           // isLoading: false,
           data: data
         });
+        console.log("component mount");
       })
       .catch(err => {
         this.setState({
@@ -48,17 +49,38 @@ class Bookings extends Component {
     this.setState({ data: updatedBookingData });
   };
 
+  handleClick = (event, sortKey) => {
+    console.log("i was clicked");
+    const nData = this.state.data;
+    function sortArr(a, b) {
+      var nameA = a[sortKey];
+      var nameB = b[sortKey];
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    }
+    const sortedData = nData.sort(sortArr);
+    this.setState({ data: sortedData });
+  };
+
   render() {
     if (this.state.err) {
       return <span>Something went wrong!</span>;
     } else {
-      console.log(this.state.data);
-
       return (
         <div className="App-content">
           <div className="container">
             <Search search={this.search} />
-            <SearchResults results={this.state.data} />
+            <SearchResults
+              results={this.state.data}
+              handleClick={this.handleClick}
+            />
             <AddBooking addNewBoking={this.addNewBoking} />
           </div>
         </div>
