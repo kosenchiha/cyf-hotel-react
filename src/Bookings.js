@@ -9,7 +9,8 @@ class Bookings extends Component {
     super(props);
     this.state = {
       // isLoading: true,
-      data: []
+      data: [],
+      sorted: true
     };
   }
   componentDidMount() {
@@ -26,7 +27,7 @@ class Bookings extends Component {
           // isLoading: false,
           data: data
         });
-        console.log("component mount");
+        console.log("component Bookings mount");
       })
       .catch(err => {
         this.setState({
@@ -43,30 +44,31 @@ class Bookings extends Component {
     this.setState({ data: filteredResult });
     console.log(filteredResult);
   };
-  addNewBoking = newBookind => {
+  addNewBooking = newBookind => {
     console.log(newBookind);
     let updatedBookingData = [...this.state.data, newBookind];
     this.setState({ data: updatedBookingData });
   };
 
-  handleClick = (event, sortKey) => {
+  handleClick = sortKey => {
     console.log("i was clicked");
-    const nData = this.state.data;
+    const dataToSort = this.state.data;
     function sortArr(a, b) {
-      var nameA = a[sortKey];
-      var nameB = b[sortKey];
-      if (nameA < nameB) {
+      if (a[sortKey] < b[sortKey]) {
         return -1;
       }
-      if (nameA > nameB) {
+      if (a[sortKey] > b[sortKey]) {
         return 1;
       }
-
-      // names must be equal
       return 0;
     }
-    const sortedData = nData.sort(sortArr);
-    this.setState({ data: sortedData });
+    const sortedData = dataToSort.sort(sortArr);
+    this.state.sorted
+      ? this.setState({ data: sortedData, sorted: !this.state.sorted })
+      : this.setState({
+          data: sortedData.reverse(),
+          sorted: !this.state.sorted
+        });
   };
 
   render() {
@@ -81,7 +83,10 @@ class Bookings extends Component {
               results={this.state.data}
               handleClick={this.handleClick}
             />
-            <AddBooking addNewBoking={this.addNewBoking} />
+            <AddBooking
+              addNewBooking={this.addNewBooking}
+              dataLength={this.state.data.length}
+            />
           </div>
         </div>
       );
